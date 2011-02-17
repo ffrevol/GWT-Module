@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='com.ffrevol.gui.provisioning_module'/>
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/provisioning_module/provisioning" class="com.ffrevol.gui.server.ProvServlet" />
+
+</module>

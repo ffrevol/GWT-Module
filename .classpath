@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<classpath>
+   <classpathentry kind="src" path="src/main/java"/>
+   <classpathentry kind="src" path="src/test/java"/>
+   <classpathentry kind="lib" path="D:/MesDocs/MyDev/tools/gwt-2.1.0/gwt-user.jar"/>
+   <classpathentry kind="lib" path="D:/MesDocs/MyDev/tools/gwt-2.1.0/gwt-dev.jar"/>
+   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+   <classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+   <classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
+
+</classpath>
