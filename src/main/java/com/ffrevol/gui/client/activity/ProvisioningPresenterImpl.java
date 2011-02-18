@@ -1,5 +1,7 @@
 package com.ffrevol.gui.client.activity;
 
+import java.util.logging.Logger;
+
 import com.ffrevol.gui.client.provisioning_module;
 import com.ffrevol.gui.client.ui.ProvisioningView.Presenter;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -7,12 +9,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ProvisioningPresenterImpl implements Presenter, AsyncCallback<String>
 {
 
-	private final provisioning_module provisioningModule;
+	private final provisioning_module provisioningModule;	
+	private Logger logger = Logger.getLogger(ProvisioningPresenterImpl.class.getName());
 
 	public ProvisioningPresenterImpl(provisioning_module provisioningModule)
 	{
 		this.provisioningModule = provisioningModule;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -24,6 +26,7 @@ public class ProvisioningPresenterImpl implements Presenter, AsyncCallback<Strin
 	@Override
 	public void onFailure(Throwable caught)
 	{
+		logger.severe("provisioning get failed");
 		provisioningModule.provisioningView().setProvisioning(caught.getLocalizedMessage());
 		
 	}
@@ -31,6 +34,7 @@ public class ProvisioningPresenterImpl implements Presenter, AsyncCallback<Strin
 	@Override
 	public void onSuccess(String result)
 	{
+		logger.severe("provisioning get succeed");
 		provisioningModule.provisioningView().setProvisioning(result);		
 	}
 

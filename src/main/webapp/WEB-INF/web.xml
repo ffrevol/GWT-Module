@@ -6,6 +6,15 @@
 <web-app>
   
   <!-- Servlets -->
+  <servlet>
+    <servlet-name>provServlet</servlet-name>
+    <servlet-class>com.ffrevol.gui.server.ProvServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>provServlet</servlet-name>
+    <url-pattern>/provisioning_module/provisioning</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

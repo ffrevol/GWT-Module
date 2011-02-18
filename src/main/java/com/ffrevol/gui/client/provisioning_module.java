@@ -1,24 +1,15 @@
 package com.ffrevol.gui.client;
 
-import com.ffrevol.gui.client.activity.ProvisioningPresenter;
 import com.ffrevol.gui.client.activity.ProvisioningPresenterImpl;
-import com.ffrevol.gui.client.mvp.AppActivityMapper;
-import com.ffrevol.gui.client.mvp.AppPlaceHistoryMapper;
 import com.ffrevol.gui.client.place.ServiceTypePlace;
 import com.ffrevol.gui.client.ui.ProvisioningComposite;
 import com.ffrevol.gui.client.ui.ProvisioningView;
-import com.ffrevol.gui.client.ui.ProvisioningWidget;
-import com.google.gwt.activity.shared.ActivityManager;
-import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.place.shared.PlaceHistoryHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.

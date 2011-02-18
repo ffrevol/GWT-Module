@@ -25,10 +25,11 @@ public class ProvServlet extends RemoteServiceServlet implements ProvisioningSer
 		try
 		{
 			prov = new FileReader(DESTINATION_FILE_PATH);
-			char[] cbuf = new char[128];		
-			while(prov.read(cbuf) > 0)
+			char[] cbuf = new char[128];
+			int read_char;
+			while((read_char = prov.read(cbuf)) > 0)
 			{	 
-				out.append(cbuf);
+				out.append(cbuf, 0, read_char);
 			}
 		}
 		catch (FileNotFoundException e)
