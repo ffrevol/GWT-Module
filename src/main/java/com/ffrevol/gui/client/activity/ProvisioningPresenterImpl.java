@@ -6,7 +6,7 @@ import com.ffrevol.gui.client.provisioning_module;
 import com.ffrevol.gui.client.ui.ProvisioningView.Presenter;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class ProvisioningPresenterImpl implements Presenter, AsyncCallback<String>
+public class ProvisioningPresenterImpl implements Presenter
 {
 
 	private final provisioning_module provisioningModule;	
@@ -20,22 +20,46 @@ public class ProvisioningPresenterImpl implements Presenter, AsyncCallback<Strin
 	@Override
 	public void load()
 	{
-		provisioningModule.provisioningService().getProvisioning(this);		
+		AsyncCallback<String> callback = new AsyncCallback<String>()
+		{
+			
+			@Override
+			public void onSuccess(String result)
+			{
+				logger.severe("provisioning get succeed");
+				provisioningModule.provisioningView().setProvisioning(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught)
+			{
+				logger.severe("provisioning get failed");
+				provisioningModule.provisioningView().setProvisioning(caught.getLocalizedMessage());
+				
+			}
+		};
+		provisioningModule.provisioningService().getProvisioning(callback);		
 	}
-
+	
 	@Override
-	public void onFailure(Throwable caught)
+	public void save(String data)
 	{
-		logger.severe("provisioning get failed");
-		provisioningModule.provisioningView().setProvisioning(caught.getLocalizedMessage());
+		AsyncCallback<String> callback = new AsyncCallback<String>()
+		{
+			
+			@Override
+			public void onSuccess(String result)
+			{
+				logger.severe("provisioning set succeed");				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught)
+			{
+				logger.severe("provisioning set failed");				
+			}
+		};
+		provisioningModule.provisioningService().saveProvisioning(data, callback);
 		
-	}
-
-	@Override
-	public void onSuccess(String result)
-	{
-		logger.severe("provisioning get succeed");
-		provisioningModule.provisioningView().setProvisioning(result);		
-	}
-
+	}	
 }

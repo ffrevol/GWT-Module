@@ -30,6 +30,14 @@ public class ProvisioningComposite extends Composite implements ProvisioningView
 			}
 		});
 		btnLoadbutton.setText("Load");
+		Button btnSavebutton = new Button("Save_button");
+		panel.add(btnSavebutton);
+		btnSavebutton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				presenter.save(getProvisioning());
+			}
+		});
+		btnSavebutton.setText("Save");
 		textArea = new TextArea();
 		textArea.setSize("200", "120");
 		textArea.setHeight("100%");
@@ -52,6 +60,12 @@ public class ProvisioningComposite extends Composite implements ProvisioningView
 		
 	    logger.log(Level.SEVERE, "receive prov : " + prov);
 		textArea.setText(prov);
+	}
+
+	@Override
+	public String getProvisioning()
+	{
+		return textArea.getValue();
 	}
 
 }
