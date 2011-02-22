@@ -1,14 +1,16 @@
 package com.ffrevol.gui.client;
 
-import com.ffrevol.gui.client.activity.ProvisioningPresenterImpl;
-import com.ffrevol.gui.client.place.ServiceTypePlace;
-import com.ffrevol.gui.client.ui.ProvisioningComposite;
-import com.ffrevol.gui.client.ui.ProvisioningView;
+import com.ffrevol.gui.client.mvp.AppActivityMapper;
+import com.ffrevol.gui.client.mvp.AppPlaceHistoryMapper;
+import com.ffrevol.gui.client.place.ProvisioningPlace;
+import com.ffrevol.gui.client.ui.ProvisioningWidget;
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
-import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -26,12 +28,10 @@ public class provisioning_module implements EntryPoint {
   /**
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
-  private final ProvisioningServiceAsync provService = GWT.create(ProvisioningService.class);
-  private ProvisioningView appWidget = new ProvisioningComposite();
-  private Place defaultPlace = new ServiceTypePlace("World!");  
-
-  public ProvisioningView provisioningView() { return appWidget; } 
-  public ProvisioningServiceAsync provisioningService() { return provService; }
+  
+  private ProvisioningWidget appWidget = new ProvisioningWidget();
+  private Place defaultPlace = new ProvisioningPlace("World!");
+  
   /**
    * This is the entry point method.
    */
@@ -39,23 +39,23 @@ public class provisioning_module implements EntryPoint {
 	// Create ClientFactory using deferred binding so we can replace with different
 		// impls in gwt.xml
 		ClientFactory clientFactory = GWT.create(ClientFactory.class);
-		EventBus eventBus = clientFactory.getEventBus();
-		PlaceController placeController = clientFactory.getPlaceController();
+		EventBus eventBus = clientFactory.getEventBus();		
 
 		// Start ActivityManager for the main widget with our ActivityMapper
-//		ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
-//		ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
-//		activityManager.setDisplay(appWidget);
+		ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
+		ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
+		activityManager.setDisplay(appWidget);
 
+		//clientFactory.getPlaceController().goTo(defaultPlace);
 		// Start PlaceHistoryHandler with our PlaceHistoryMapper
-//		AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
-//		PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
-//		historyHandler.register(placeController, eventBus, defaultPlace);
+		AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
+		PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
+		historyHandler.register(clientFactory.getPlaceController(), eventBus, defaultPlace);
 
-		ProvisioningView.Presenter presenter = new ProvisioningPresenterImpl(this);
+//		ProvisioningView.Presenter presenter = new ProvisioningPresenterImpl(this);
 		RootPanel.get().add(appWidget);
-		appWidget.setPresenter(presenter);
+//		appWidget.setPresenter(presenter);
 		// Goes to place represented on URL or default place
-//		historyHandler.handleCurrentHistory();
+		historyHandler.handleCurrentHistory();
   }
 }

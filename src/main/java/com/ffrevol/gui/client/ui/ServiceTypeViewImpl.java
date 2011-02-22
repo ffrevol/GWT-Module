@@ -1,30 +1,49 @@
 package com.ffrevol.gui.client.ui;
 
-import com.ffrevol.gui.client.activity.ServiceBaseActivity;
+import java.util.logging.Logger;
+
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ServiceTypeViewImpl implements ServiceTypeView
+public class ServiceTypeViewImpl extends Composite implements ServiceTypeView
 {
+
+	private String serviceTypeName;
+	private Presenter serviceTypeActivity;
+	private Label svcTypeValue;
+	private Logger logger = Logger.getLogger(ServiceTypeViewImpl.class.getName());
 
 	@Override
 	public void setName(String name)
 	{
-		// TODO Auto-generated method stub
-		
+		this.serviceTypeName = name;
+		svcTypeValue.setText(serviceTypeName);
+	}
+
+	public ServiceTypeViewImpl()
+	{
+		HorizontalPanel panel = new HorizontalPanel();		
+		Label svcType = new Label("serviceType : ");
+		panel.add(svcType);
+		panel.addStyleName("ffrevol_coloredbackground");
+		svcTypeValue = new Label("unknown");
+		panel.add(svcTypeValue);
+		initWidget(panel);
+		logger.info("initialized with " + serviceTypeName);
 	}
 
 	@Override
-	public void setPresenter(ServiceBaseActivity serviceTypeActivity)
+	public void setPresenter(Presenter serviceTypeActivity)
 	{
-		// TODO Auto-generated method stub
-		
+		this.serviceTypeActivity = serviceTypeActivity;
 	}
 
 	@Override
 	public Widget asWidget()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 }

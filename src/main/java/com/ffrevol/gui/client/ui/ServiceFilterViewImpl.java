@@ -1,6 +1,5 @@
 package com.ffrevol.gui.client.ui;
 
-import com.ffrevol.gui.client.activity.ServiceBaseActivity;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ServiceFilterViewImpl implements ServiceFilterView
@@ -13,18 +12,18 @@ public class ServiceFilterViewImpl implements ServiceFilterView
 		
 	}
 
-	@Override
-	public void setPresenter(ServiceBaseActivity serviceTypeActivity)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+		@Override
 	public Widget asWidget()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+		@Override
+		public void setPresenter(Presenter listener)
+		{
+			// TODO Auto-generated method stub
+			
+		}
 
 }

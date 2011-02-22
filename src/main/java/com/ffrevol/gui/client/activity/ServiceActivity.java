@@ -11,8 +11,7 @@ public class ServiceActivity extends ServiceBaseActivity
 	public ServiceActivity(ServiceBasePlace place,
 			ClientFactory clientFactory)
 	{
-		super(place, clientFactory);
-		// TODO Auto-generated constructor stub
+		super(place, clientFactory);		
 	}
 
 	@Override

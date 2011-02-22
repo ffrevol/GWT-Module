@@ -1,9 +1,11 @@
 package com.ffrevol.gui.client.mvp;
 
 import com.ffrevol.gui.client.ClientFactory;
+import com.ffrevol.gui.client.activity.ProvisioningActivity;
 import com.ffrevol.gui.client.activity.ServiceActivity;
 import com.ffrevol.gui.client.activity.ServiceFilterActivity;
 import com.ffrevol.gui.client.activity.ServiceTypeActivity;
+import com.ffrevol.gui.client.place.ProvisioningPlace;
 import com.ffrevol.gui.client.place.ServiceBasePlace;
 import com.ffrevol.gui.client.place.ServiceFilterPlace;
 import com.ffrevol.gui.client.place.ServicePlace;
@@ -35,7 +37,9 @@ public class AppActivityMapper implements ActivityMapper {
 	@Override
 	public Activity getActivity(Place place) {
 		// This is begging for GIN
-		if (place instanceof ServiceTypePlace)
+		if (place instanceof ProvisioningPlace)
+			return new ProvisioningActivity((ServiceBasePlace) place, clientFactory);
+		else if (place instanceof ServiceTypePlace)
 			return new ServiceTypeActivity((ServiceBasePlace) place, clientFactory);
 		else if (place instanceof ServicePlace)
 			return new ServiceActivity((ServiceBasePlace) place, clientFactory);

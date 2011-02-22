@@ -6,16 +6,16 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 //public class HelloPlace extends ActivityPlace<HelloActivity>
 public class ServiceBasePlace extends Place
 {
-	private String helloName;
+	private String name;
 	
 	public ServiceBasePlace(String token)
 	{
-		this.helloName = token;
+		this.name = token;
 	}
 
 	public String getName()
 	{
-		return helloName;
+		return name;
 	}
 
 	public static class Tokenizer implements PlaceTokenizer<ServiceBasePlace>

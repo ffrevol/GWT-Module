@@ -13,18 +13,22 @@ public class ServiceViewImpl implements ServiceView
 		
 	}
 
-	@Override
-	public void setPresenter(ServiceBaseActivity serviceTypeActivity)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public Widget asWidget()
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public void setPresenter(Presenter listener)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

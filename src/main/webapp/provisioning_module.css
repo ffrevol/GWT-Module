@@ -10,6 +10,10 @@ h1 {
   text-align: center;
 }
 
+.ffrevol_coloredbackground
+{
+  background-color: purple;	
+}
 .sendButton {
   display: block;
   font-size: 16pt;

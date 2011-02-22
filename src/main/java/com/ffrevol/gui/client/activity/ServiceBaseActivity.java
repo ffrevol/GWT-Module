@@ -13,6 +13,16 @@ ServiceBaseView.Presenter {
 	// Used to obtain views, eventBus, placeController
 	// Alternatively, could be injected via GIN
 	private ClientFactory clientFactory;
+	public ClientFactory getClientFactory()
+	{
+		return clientFactory;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
 	// Name that will be appended to "Hello,"
 	private String name;
 
@@ -32,9 +42,9 @@ ServiceBaseView.Presenter {
 	 * Ask user before stopping this activity
 	 */
 	@Override
-	public String mayStop() {
-		return "Please hold on. This activity is stopping.";
-	}
+//	public String mayStop() {
+//		return name + ":"+ "Please hold on. This activity is stopping.";
+//	}
 
 	/**
 	 * Navigate to a new Place in the browser
