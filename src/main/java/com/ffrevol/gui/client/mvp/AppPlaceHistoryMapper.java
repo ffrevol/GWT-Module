@@ -1,8 +1,6 @@
 package com.ffrevol.gui.client.mvp;
 
-import com.ffrevol.gui.client.place.ServiceFilterPlace;
-import com.ffrevol.gui.client.place.ServicePlace;
-import com.ffrevol.gui.client.place.ServiceTypePlace;
+import com.ffrevol.gui.client.place.ProvisioningPlace;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 
@@ -12,6 +10,6 @@ import com.google.gwt.place.shared.WithTokenizers;
  * annotation or by extending PlaceHistoryMapperWithFactory and creating a
  * separate TokenizerFactory.
  */
-@WithTokenizers( { ServiceTypePlace.Tokenizer.class, ServicePlace.Tokenizer.class, ServiceFilterPlace.Tokenizer.class })
+@WithTokenizers( { ProvisioningPlace.Tokenizer.class})
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

@@ -23,7 +23,6 @@ ServiceBaseView.Presenter {
 		return name;
 	}
 
-	// Name that will be appended to "Hello,"
 	private String name;
 
 	public ServiceBaseActivity(ServiceBasePlace place, ClientFactory clientFactory) {

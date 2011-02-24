@@ -1,5 +1,8 @@
 package com.ffrevol.gui.client.activity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.ffrevol.gui.client.ClientFactory;
@@ -69,10 +72,18 @@ public class ProvisioningActivity extends ServiceBaseActivity implements Provisi
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus)
 	{
-		ProvisioningView provView = getClientFactory().getProvisioningView();
-		provView.setName(getName());
+		ProvisioningView provView = getClientFactory().getProvisioningView();		
+		serviceType(getName());
 		provView.setPresenter(this);
 		containerWidget.setWidget(provView.asWidget());
 		
+	}
+
+	@Override
+	public void serviceType(String name)
+	{
+		getClientFactory().getProvisioningView().setContext(name);
+		List<String> listService = Arrays.asList("Buenos Aires", "Córdoba", "La Plata");
+		getClientFactory().getProvisioningView().setServiceList(listService);
 	}	
 }

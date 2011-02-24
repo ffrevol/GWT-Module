@@ -30,7 +30,7 @@ public class provisioning_module implements EntryPoint {
    */
   
   private ProvisioningWidget appWidget = new ProvisioningWidget();
-  private Place defaultPlace = new ProvisioningPlace("World!");
+  private Place defaultPlace = new ProvisioningPlace("WAP");
   
   /**
    * This is the entry point method.

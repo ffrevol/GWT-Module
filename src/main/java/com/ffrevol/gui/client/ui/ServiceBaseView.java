@@ -10,8 +10,7 @@ public interface ServiceBaseView extends IsWidget
 	{
 		void goTo(Place place);
 	}
-
-	void setName(String name);	
+		
 	void setPresenter(Presenter listener);
 
 }
