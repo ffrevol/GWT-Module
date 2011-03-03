@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.ffrevol.gui.tools.LogFactory;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -23,7 +24,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 
 	private Presenter presenter;
 	private TextArea textArea;
-	private Logger logger = Logger.getLogger(ProvisioningViewImpl.class.getName());
+	private Logger logger = LogFactory.getLogger();
 	private final ContextUI context;
 	private final CellList<String> listCell;
 	private Panel editPanel;

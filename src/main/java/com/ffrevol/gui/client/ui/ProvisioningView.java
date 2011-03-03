@@ -20,9 +20,9 @@ public interface ProvisioningView extends IsWidget, ServiceBaseView
 	public interface Presenter extends ServiceBaseView.Presenter
 	{
 		void load();
-		void save(String data);
-		
-		void serviceType(String name);		
+		void save(String data);		
+		void serviceType(String name);	
+		boolean isReady();
 	}
 	
 }

@@ -2,8 +2,17 @@
 <module>
   <!-- Inherit our applications main module.                      -->
   <inherits name='com.ffrevol.gui.provisioning_module'/>
-
+  <inherits name="com.google.gwt.junit.JUnit"/> 
+  <inherits name="com.google.gwt.logging.Logging"/>
+   
   <!-- Specify the path to any remote services.                   -->
   <servlet path="/provisioning_module/provisioning" class="com.ffrevol.gui.server.ProvServlet" />
-
+  
+  <set-property name="gwt.logging.logLevel" value="FINE"/>  
+# To disable logging        
+<set-property name="gwt.logging.enabled" value="TRUE"/>      
+# To disable a default Handler      
+<set-property name="gwt.logging.consoleHandler" value="DISABLED"/>  
+<set-property name="gwt.logging.systemHandler" value="ENABLED"/>
+   
 </module>
