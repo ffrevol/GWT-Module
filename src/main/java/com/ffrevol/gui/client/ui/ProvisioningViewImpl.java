@@ -8,6 +8,7 @@ import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -144,16 +145,16 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 	}
 
 	@Override
-	public void setGrid(Grid grid)
-	{
-		gridPanel = grid;		
-	}
-
-	@Override
 	public void setServiceList(List<String> values)
 	{	
 		listCell.setRowCount(0, true);
 		listCell.setRowData(0, values);
+	}
+
+	@Override
+	public void setGrid(CellTable<?> table) {
+		gridPanel.clear();
+		gridPanel.add(table);
 	}
 
 }
