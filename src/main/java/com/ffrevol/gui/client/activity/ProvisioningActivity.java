@@ -1,13 +1,16 @@
 package com.ffrevol.gui.client.activity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 import com.ffrevol.gui.client.ClientFactory;
+import com.ffrevol.gui.client.model.Service;
+import com.ffrevol.gui.client.model.ServiceType;
 import com.ffrevol.gui.client.place.ServiceBasePlace;
 import com.ffrevol.gui.client.ui.ProvisioningView;
+import com.ffrevol.gui.tools.Function;
+import com.ffrevol.gui.tools.Lists;
+import com.ffrevol.gui.tools.ServiceToNameFunction;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -83,7 +86,9 @@ public class ProvisioningActivity extends ServiceBaseActivity implements Provisi
 	public void serviceType(String name)
 	{
 		getClientFactory().getProvisioningView().setContext(name);
-		List<String> listService = Arrays.asList("Buenos Aires", "Córdoba", "La Plata");
-		getClientFactory().getProvisioningView().setServiceList(listService);
+		ServiceType serviceType = getClientFactory().getProvisioningModel().getServiceType(name);		
+		List<Service> listService = serviceType.getService();
+		Function<Service, String> serviceToName = new ServiceToNameFunction();		
+		getClientFactory().getProvisioningView().setServiceList(Lists.transform(listService, serviceToName));
 	}	
 }

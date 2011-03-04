@@ -151,7 +151,8 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 
 	@Override
 	public void setServiceList(List<String> values)
-	{
+	{	
+		listCell.setRowCount(0, true);
 		listCell.setRowData(0, values);
 	}
 
