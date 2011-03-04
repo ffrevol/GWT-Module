@@ -16,8 +16,8 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public int Id() {
-		return id;
+	public String Id() {
+		return String.valueOf(id);
 	}
 
 }

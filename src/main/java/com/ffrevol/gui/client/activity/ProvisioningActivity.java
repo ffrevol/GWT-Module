@@ -7,18 +7,16 @@ import com.ffrevol.gui.client.ClientFactory;
 import com.ffrevol.gui.client.model.Service;
 import com.ffrevol.gui.client.model.ServiceType;
 import com.ffrevol.gui.client.place.ServiceBasePlace;
+import com.ffrevol.gui.client.ui.EditService;
 import com.ffrevol.gui.client.ui.ProvisioningView;
+import com.ffrevol.gui.client.ui.ServiceTable;
 import com.ffrevol.gui.tools.Function;
 import com.ffrevol.gui.tools.Lists;
 import com.ffrevol.gui.tools.ServiceToNameFunction;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.gwt.user.client.ui.Panel;
 
 public class ProvisioningActivity extends ServiceBaseActivity implements
 		ProvisioningView.Presenter {
@@ -88,47 +86,17 @@ public class ProvisioningActivity extends ServiceBaseActivity implements
 		List<Service> listService = serviceType.getService();
 		setServiceList(listService);
 		setGrid(listService);
+		setEdit(listService);
+	}
+
+	private void setEdit(List<Service> listService) {
+		Service first = listService.get(0);
+		Panel edit = new EditService(first);
+		getClientFactory().getProvisioningView().setEditPanel(edit );
 	}
 
 	private void setGrid(List<Service> listService) {
-
-		CellTable<Service> table = new CellTable<Service>();
-		TextColumn<Service> nameColumn = new TextColumn<Service>() {
-			@Override
-			public String getValue(Service object) {
-				return object.Name();
-			}
-		};
-		table.addColumn(nameColumn, "Name");
-		TextColumn<Service> idColumn = new TextColumn<Service>() {
-			@Override
-			public String getValue(Service object) {
-				return String.valueOf(object.Id());
-			}
-		};
-		table.addColumn(idColumn, "Id");
-
-		// Add a selection model to handle user selection.
-		final SingleSelectionModel<Service> selectionModel = new SingleSelectionModel<Service>();
-		table.setSelectionModel(selectionModel);
-		selectionModel
-				.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-					public void onSelectionChange(SelectionChangeEvent event) {
-						Service selected = selectionModel.getSelectedObject();
-						if (selected != null) {
-							Window.alert("You selected: " + selected.Name());
-						}
-					}
-				});
-
-		// Set the total row count. This isn't strictly necessary, but it
-		// affects
-		// paging calculations, so its good habit to keep the row count up to
-		// date.
-		table.setRowCount(listService.size(), true);
-
-		// Push the data into the widget.
-		table.setRowData(0, listService);
+		ServiceTable table = new ServiceTable(listService);		
 		getClientFactory().getProvisioningView().setGrid(table);
 	}
 

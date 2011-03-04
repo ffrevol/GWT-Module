@@ -141,7 +141,8 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 	@Override
 	public void setEditPanel(Panel edit)
 	{
-		editPanel = edit;		
+		editPanel.clear();
+		editPanel.add(edit);		
 	}
 
 	@Override
