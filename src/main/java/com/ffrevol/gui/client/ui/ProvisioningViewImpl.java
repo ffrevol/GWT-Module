@@ -4,20 +4,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.gwt.cell.client.TextCell;
+import com.ffrevol.gui.client.model.Service;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
+import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 public class ProvisioningViewImpl extends Composite implements ProvisioningView
 {
@@ -26,7 +30,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 	private TextArea textArea;
 	private Logger logger = Logger.getLogger(ProvisioningViewImpl.class.getName());
 	private final ContextUI context;
-	private final CellList<String> listCell;
+	private final CellList<Service> listCell;
 	private Panel editPanel;
 	private Panel gridPanel;
 
@@ -86,8 +90,24 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 		Label listType = new Label("List Name");
 		leftBodyPanel.add(listType);
 		
-		TextCell textCell = new TextCell();
-		listCell = new CellList<String>(textCell);
+		Cell<Service> serviceCell = new ServiceCell();
+		listCell = new CellList<Service>(serviceCell);
+		listCell.setPageSize(30);
+		listCell.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
+		listCell.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
+
+		    // Add a selection model so we can select cells.
+		final SingleSelectionModel<Service> selectionModel = new SingleSelectionModel<Service>();
+
+	    listCell.setSelectionModel(selectionModel);
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	      public void onSelectionChange(SelectionChangeEvent event) {
+	    	  presenter.service(selectionModel.getSelectedObject());
+	      }
+	    });
+
+		
+		
 		leftBodyPanel.add(listCell);		
 		VerticalPanel rightBodyPanel = new VerticalPanel();
 		bodyPanel.add(rightBodyPanel);	
@@ -146,7 +166,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 	}
 
 	@Override
-	public void setServiceList(List<String> values)
+	public void setServiceList(List<Service> values)
 	{	
 		listCell.setRowCount(0, true);
 		listCell.setRowData(0, values);

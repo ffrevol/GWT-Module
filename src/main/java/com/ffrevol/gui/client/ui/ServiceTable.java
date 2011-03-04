@@ -2,7 +2,10 @@ package com.ffrevol.gui.client.ui;
 
 import java.util.List;
 
+import com.ffrevol.gui.client.ClientFactory;
+import com.ffrevol.gui.client.activity.ProvisioningActivity;
 import com.ffrevol.gui.client.model.Service;
+import com.ffrevol.gui.client.ui.ProvisioningView.Presenter;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
@@ -12,8 +15,10 @@ import com.google.gwt.view.client.SingleSelectionModel;
 public class ServiceTable extends CellTable<Service> {
 
 	private final List<Service> listService;
+	private final Presenter presenter;
 
-	public ServiceTable(List<Service> _listService) {
+	public ServiceTable(Presenter _presenter, List<Service> _listService) {
+		this.presenter = _presenter;
 		this.listService = _listService;
 		TextColumn<Service> nameColumn = new TextColumn<Service>() {
 			@Override
@@ -38,7 +43,7 @@ public class ServiceTable extends CellTable<Service> {
 					public void onSelectionChange(SelectionChangeEvent event) {
 						Service selected = selectionModel.getSelectedObject();
 						if (selected != null) {
-							Window.alert("You selected: " + selected.Name());
+							presenter.service(selected);
 						}
 					}
 				});

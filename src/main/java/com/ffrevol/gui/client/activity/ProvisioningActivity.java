@@ -11,7 +11,6 @@ import com.ffrevol.gui.client.ui.EditService;
 import com.ffrevol.gui.client.ui.ProvisioningView;
 import com.ffrevol.gui.client.ui.ServiceTable;
 import com.ffrevol.gui.tools.Function;
-import com.ffrevol.gui.tools.Lists;
 import com.ffrevol.gui.tools.ServiceToNameFunction;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -22,6 +21,7 @@ public class ProvisioningActivity extends ServiceBaseActivity implements
 		ProvisioningView.Presenter {
 	private Logger logger = Logger.getLogger(ProvisioningActivity.class
 			.getName());
+	private String currentServiceType;
 
 	public ProvisioningActivity(ServiceBasePlace place,
 			ClientFactory clientFactory) {
@@ -80,29 +80,38 @@ public class ProvisioningActivity extends ServiceBaseActivity implements
 
 	@Override
 	public void serviceType(String name) {
+		currentServiceType = name;
 		getClientFactory().getProvisioningView().setContext(name);
 		ServiceType serviceType = getClientFactory().getProvisioningModel()
 				.getServiceType(name);
 		List<Service> listService = serviceType.getService();
 		setServiceList(listService);
 		setGrid(listService);
-		setEdit(listService);
+		Service first = listService.get(0);
+		setEdit(first);
+	}
+	
+	@Override
+	public void service(Service selected) {		
+		getClientFactory().getProvisioningView().setContext(currentServiceType + " " + 
+				selected.Name());
+		setEdit(selected);		
 	}
 
-	private void setEdit(List<Service> listService) {
-		Service first = listService.get(0);
-		Panel edit = new EditService(first);
+	private void setEdit(Service service) {		
+		Panel edit = new EditService(service);
 		getClientFactory().getProvisioningView().setEditPanel(edit );
 	}
 
 	private void setGrid(List<Service> listService) {
-		ServiceTable table = new ServiceTable(listService);		
+		ServiceTable table = new ServiceTable(this, listService);		
 		getClientFactory().getProvisioningView().setGrid(table);
 	}
 
 	private void setServiceList(List<Service> listService) {
 		Function<Service, String> serviceToName = new ServiceToNameFunction();
-		getClientFactory().getProvisioningView().setServiceList(
-				Lists.transform(listService, serviceToName));
+		getClientFactory().getProvisioningView().setServiceList(listService);
 	}
+
+	
 }
