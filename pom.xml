@@ -95,19 +95,22 @@
           <forkMode>always</forkMode>
 
           <!-- Folder for generated testing stuff --> 
-          <systemProperties>
-            <property>
-              <name>gwt.args</name>
-              <value>-out target/www</value>
-            </property>
-          </systemProperties>
+          <systemPropertyVariables>
+            <gwt.args>-out target/www</gwt.args>            
+          </systemPropertyVariables>
           
-           <excludes>
-             <exclude>**/*TotoGwtTest.java</exclude>
-           </excludes>
-
         </configuration>
-      </plugin>
+      </plugin>  
+      <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>gwt-maven-plugin</artifactId>
+    <version>2.1.0-1</version>
+    <configuration>
+      <mode>htmlunit</mode>
+      <htmlunit>IE7,FF3</htmlunit>
+    </configuration>
+  </plugin>
+      
       
       <!-- Copy static web files before executing gwt:run -->
       <plugin>

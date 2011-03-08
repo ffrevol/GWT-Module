@@ -5,7 +5,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public class TestProvisioning_module  extends GWTTestCase  {
+public class Provisioning_moduleTestGwt  extends GWTTestCase  {
 
 	private AsyncCallback<String> callback;	
 	private ProvisioningServiceAsync provService;
