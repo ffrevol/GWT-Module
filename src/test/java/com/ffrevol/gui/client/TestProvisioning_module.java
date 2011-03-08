@@ -1,7 +1,5 @@
 package com.ffrevol.gui.client;
 
-import com.ffrevol.gui.service.GUISystem;
-import com.ffrevol.gui.service.GUISystemImpl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -9,8 +7,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public class TestProvisioning_module  extends GWTTestCase  {
 
-	private AsyncCallback<String> callback;
-	private GUISystem system = new GUISystemImpl();
+	private AsyncCallback<String> callback;	
 	private ProvisioningServiceAsync provService;
 	 /**
 	   * Must refer to a valid module that sources this class.

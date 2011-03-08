@@ -12,8 +12,7 @@
 
   <!-- Other module inherits                                      -->
   <inherits name="com.google.gwt.activity.Activity"/>
-  <inherits name="com.google.gwt.place.Place"/>
-  <inherits name="com.google.gwt.junit.JUnit"/>
+  <inherits name="com.google.gwt.place.Place"/>  
   <inherits name="com.google.gwt.logging.Logging"/>  
   
   <!-- Specify the app entry point class.                         -->
