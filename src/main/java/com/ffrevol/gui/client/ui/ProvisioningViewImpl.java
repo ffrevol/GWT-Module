@@ -45,7 +45,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 		topPanel.add(btnLoadbutton);
 		btnLoadbutton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				presenter.load();
+				presenter.loadClicked();
 			}
 		});
 		btnLoadbutton.setText("Load");
@@ -53,7 +53,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 		topPanel.add(btnSavebutton);
 		btnSavebutton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				presenter.save(getProvisioning());				
+				presenter.saveClicked(getProvisioning());				
 			}
 		});
 		btnSavebutton.setText("Save");
@@ -67,7 +67,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 			@Override
 			public void onClick(ClickEvent event)
 			{
-				presenter.serviceType(mmsButton.getText());
+				presenter.serviceTypeClicked(mmsButton.getText());
 			}
 		});
 		final Button wapButton = new Button("WAP");
@@ -77,7 +77,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 			@Override
 			public void onClick(ClickEvent event)
 			{
-				presenter.serviceType(wapButton.getText());
+				presenter.serviceTypeClicked(wapButton.getText());
 			}
 		});
 		
@@ -102,7 +102,7 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 	    listCell.setSelectionModel(selectionModel);
 	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 	      public void onSelectionChange(SelectionChangeEvent event) {
-	    	  presenter.service(selectionModel.getSelectedObject());
+	    	  presenter.serviceClicked(selectionModel.getSelectedObject());
 	      }
 	    });
 
@@ -158,8 +158,8 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 		context.setContext(value);
 	}
 
-	@Override
-	public void setEditPanel(Panel edit)
+	
+	private void setEditPanel(Panel edit)
 	{
 		editPanel.clear();
 		editPanel.add(edit);		
@@ -171,11 +171,22 @@ public class ProvisioningViewImpl extends Composite implements ProvisioningView
 		listCell.setRowCount(0, true);
 		listCell.setRowData(0, values);
 	}
-
-	@Override
-	public void setGrid(CellTable<?> table) {
+	
+	private void setGrid(CellTable<?> table) {
 		gridPanel.clear();
 		gridPanel.add(table);
+	}
+
+	@Override
+	public void setEdit(Service selected) {
+		Panel edit = new EditService(selected);
+		setEditPanel(edit);
+	}
+
+	@Override
+	public void setGrid(List<Service> value) {
+		ServiceTable table = new ServiceTable(presenter, value);		
+		setGrid(table);
 	}
 
 }

@@ -10,8 +10,6 @@ import com.ffrevol.gui.client.place.ServiceBasePlace;
 import com.ffrevol.gui.client.ui.EditService;
 import com.ffrevol.gui.client.ui.ProvisioningView;
 import com.ffrevol.gui.client.ui.ServiceTable;
-import com.ffrevol.gui.tools.Function;
-import com.ffrevol.gui.tools.ServiceToNameFunction;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -29,7 +27,7 @@ public class ProvisioningActivity extends ServiceBaseActivity implements
 	}
 
 	@Override
-	public void load() {
+	public void loadClicked() {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 
 			@Override
@@ -51,7 +49,7 @@ public class ProvisioningActivity extends ServiceBaseActivity implements
 	}
 
 	@Override
-	public void save(String data) {
+	public void saveClicked(String data) {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 
 			@Override
@@ -72,44 +70,33 @@ public class ProvisioningActivity extends ServiceBaseActivity implements
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		ProvisioningView provView = getClientFactory().getProvisioningView();
-		serviceType(getName());
+		serviceTypeClicked(getName());
 		provView.setPresenter(this);
 		containerWidget.setWidget(provView.asWidget());
 
 	}
 
 	@Override
-	public void serviceType(String name) {
+	public void serviceTypeClicked(String name) {
 		currentServiceType = name;
 		getClientFactory().getProvisioningView().setContext(name);
 		ServiceType serviceType = getClientFactory().getProvisioningModel()
 				.getServiceType(name);
 		List<Service> listService = serviceType.getService();
 		setServiceList(listService);
-		setGrid(listService);
+		getClientFactory().getProvisioningView().setGrid(listService);
 		Service first = listService.get(0);
-		setEdit(first);
+		getClientFactory().getProvisioningView().setEdit(first);
 	}
 	
 	@Override
-	public void service(Service selected) {		
+	public void serviceClicked(Service selected) {		
 		getClientFactory().getProvisioningView().setContext(currentServiceType + " " + 
 				selected.Name());
-		setEdit(selected);		
+		getClientFactory().getProvisioningView().setEdit(selected);		
 	}
-
-	private void setEdit(Service service) {		
-		Panel edit = new EditService(service);
-		getClientFactory().getProvisioningView().setEditPanel(edit );
-	}
-
-	private void setGrid(List<Service> listService) {
-		ServiceTable table = new ServiceTable(this, listService);		
-		getClientFactory().getProvisioningView().setGrid(table);
-	}
-
-	private void setServiceList(List<Service> listService) {
-		Function<Service, String> serviceToName = new ServiceToNameFunction();
+	
+	private void setServiceList(List<Service> listService) {		
 		getClientFactory().getProvisioningView().setServiceList(listService);
 	}
 

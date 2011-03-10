@@ -43,7 +43,7 @@ public class ServiceTable extends CellTable<Service> {
 					public void onSelectionChange(SelectionChangeEvent event) {
 						Service selected = selectionModel.getSelectedObject();
 						if (selected != null) {
-							presenter.service(selected);
+							presenter.serviceClicked(selected);
 						}
 					}
 				});

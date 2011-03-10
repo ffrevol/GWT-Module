@@ -15,16 +15,16 @@ public interface ProvisioningView extends IsWidget, ServiceBaseView
 	
 	void setServiceList(List<Service> value);
 	void setContext(String value);	
-	void setEditPanel(Panel edit);
-	void setGrid(CellTable<?> table);
+	void setEdit(Service selected);
+	void setGrid(List<Service> value);
 	
 	public interface Presenter extends ServiceBaseView.Presenter
 	{
-		void load();
-		void save(String data);
+		void loadClicked();
+		void saveClicked(String data);
 		
-		void serviceType(String name);
-		void service(Service selected);		
+		void serviceTypeClicked(String name);
+		void serviceClicked(Service selected);		
 	}
 
 	
